@@ -2,21 +2,14 @@ const db = require('../requests/db');
 
 const obtenerPublicaciones = async () => {
     const result = await db.query(
-        `SELECT p.*, e.nombre AS entrenador
-         FROM publicaciones p
-         JOIN entrenadores e ON p.entrenador_id = e.entrenador_id
-         ORDER BY p.creado_en DESC`
+        `SELECT * FROM publicaciones ORDER BY creado_en DESC`
     );
     return result.rows;
 };
 
 const obtenerPublicacionPorId = async (publicacion_id) => {
     const result = await db.query(
-        `SELECT p.*, e.nombre AS entrenador
-         FROM publicaciones p
-         JOIN entrenadores e ON p.entrenador_id = e.entrenador_id
-         WHERE p.publicacion_id = $1`,
-        [publicacion_id]
+        `SELECT * FROM publicaciones WHERE publicacion_id = ${publicacion_id}`,
     );
     return result.rows[0];
 };

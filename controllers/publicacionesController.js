@@ -1,4 +1,11 @@
-const { crearPublicacion, obtenerPublicaciones, obtenerPublicacionPorId, eliminarPublicacion, darLike, quitarLike } = require('../models/Publicacion');
+const { 
+    crearPublicacion, 
+    obtenerPublicaciones, 
+    obtenerPublicacionPorId: obtenerPublicacionPorIdDB, 
+    eliminarPublicacion, 
+    darLike, 
+    quitarLike 
+} = require('../models/Publicacion');
 
 const obtenerTodasPublicaciones = async (req, res) => {
     try {
@@ -13,7 +20,7 @@ const obtenerTodasPublicaciones = async (req, res) => {
 const obtenerPublicacionPorId = async (req, res) => {
     const { id } = req.params;
     try {
-        const publicacion = await obtenerPublicacionPorId(id);
+        const publicacion = await obtenerPublicacionPorIdDB(id);
         if (!publicacion) {
             return res.status(404).json({ error: "Publicación no encontrada." });
         }
